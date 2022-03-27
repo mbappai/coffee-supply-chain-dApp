@@ -147,11 +147,11 @@ contract SupplyChain {
   }
 
   // Define a function 'kill' if required
-  function kill() public {
-    if (msg.sender == owner) {
-      selfdestruct(owner);
-    }
-  }
+  // function kill() public {
+  //   if (msg.sender == owner) {
+  //     selfdestruct(owner);
+  //   }
+  // }
 
   
 
