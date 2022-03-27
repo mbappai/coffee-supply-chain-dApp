@@ -153,33 +153,7 @@ contract SupplyChain {
     }
   }
 
-  function _convertStatesToReadable(State state) private returns(string memory readableState){
-    uint stateNumber = uint(state);
-    if(stateNumber == 0){
-     return readableState = "Harvested";
-    }
-    if(stateNumber == 1){
-     return readableState = "Processed";
-    }
-    if(stateNumber == 2){
-     return readableState = "Packed";
-    }
-    if(stateNumber == 3){
-     return readableState = "ForSale";
-    }
-    if(stateNumber == 4){
-     return readableState = "Sold";
-    }
-    if(stateNumber == 5){
-     return readableState = "Shipped";
-    }
-    if(stateNumber == 6){
-     return readableState = "Received";
-    }
-    if(stateNumber == 7){
-     return readableState = "Purchased";
-    }
-  }
+  
 
   // Define a function 'harvestItem' that allows a farmer to mark an item 'Harvested'
   function harvestItem(uint _upc, address _originFarmerID, string memory _originFarmName, string memory _originFarmInformation, string memory  _originFarmLatitude, string memory _originFarmLongitude, string memory _productNotes) public 
@@ -275,7 +249,7 @@ contract SupplyChain {
     // Transfer money to farmer
     address farmerAddress = items[_upc].originFarmerID;
     //Update msg.sender balance before making transfer (checks-effect pattern)
-    payable(msg.sender).balance = msg.sender.balance - items[_upc].productPrice;
+    // msg.sender.balance = items[_upc].productPrice;
 
     //This is done to prevent re-entrancy — https://consensys.net/diligence/blog/2019/09/stop-using-soliditys-transfer-now/
     payable(farmerAddress).transfer(msg.value);
@@ -396,7 +370,7 @@ contract SupplyChain {
   productID = targetItem.productID;
   productNotes = targetItem.productNotes;
   productPrice = targetItem.productPrice;
-  itemState = targetItem.itemState;
+  itemState = uint(targetItem.itemState); 
   distributorID = targetItem.distributorID;
   retailerID = targetItem.retailerID;
   consumerID = targetItem.consumerID;
