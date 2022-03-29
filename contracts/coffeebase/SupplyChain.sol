@@ -77,16 +77,17 @@ contract SupplyChain {
 
   // Define a modifier that checks if the paid amount is sufficient to cover the price
   modifier paidEnough(uint _price) { 
-    require(msg.value >= _price); 
+    require(msg.value >= _price,"Value is less than price or no price exist"); 
     _;
   }
   
   // Define a modifier that checks the price and refunds the remaining balance
   modifier checkValue(uint _upc) {
-    _;
+    // _;
     uint _price = items[_upc].productPrice;
     uint amountToReturn = msg.value - _price;
-    payable(msg.sender).transfer(amountToReturn);
+    payable(items[_upc].consumerID).transfer(amountToReturn);
+    _;
   }
 
   // Define a modifier that checks if an item.state of a upc is Harvested
@@ -140,7 +141,7 @@ contract SupplyChain {
   // In the constructor set 'owner' to the address that instantiated the contract
   // and set 'sku' to 1
   // and set 'upc' to 1
-  constructor() public payable {
+  constructor() public {
     owner = msg.sender;
     sku = 1;
     upc = 1;
@@ -180,7 +181,7 @@ contract SupplyChain {
     // Increment sku
     sku = sku + 1;
     // Emit the appropriate event
-    emit Harvested(upc);
+    emit Harvested(_upc);
     
   }
 
@@ -232,7 +233,7 @@ contract SupplyChain {
   // Define a function 'buyItem' that allows the disributor to mark an item 'Sold'
   // Use the above defined modifiers to check if the item is available for sale, if the buyer has paid enough, 
   // and any excess ether sent is refunded back to the buyer
-  function buyItem(uint _upc) forSale(_upc) paidEnough(items[_upc].productPrice) verifyCaller(items[_upc].distributorID) checkValue(_upc) public payable 
+  function buyItem(uint _upc) checkValue(_upc) forSale(_upc) paidEnough(items[_upc].productPrice)    public payable 
     // Call modifier to check if upc has passed previous supply chain stage
     
     // Call modifer to check if buyer has paid enough
@@ -248,10 +249,7 @@ contract SupplyChain {
     
     // Transfer money to farmer
     address farmerAddress = items[_upc].originFarmerID;
-    //Update msg.sender balance before making transfer (checks-effect pattern)
-    // msg.sender.balance = items[_upc].productPrice;
 
-    //This is done to prevent re-entrancy — https://consensys.net/diligence/blog/2019/09/stop-using-soliditys-transfer-now/
     payable(farmerAddress).transfer(msg.value);
 
     
@@ -278,7 +276,7 @@ contract SupplyChain {
 
   // Define a function 'receiveItem' that allows the retailer to mark an item 'Received'
   // Use the above modifiers to check if the item is shipped
-  function receiveItem(uint _upc) shipped(_upc) public 
+  function receiveItem(uint _upc) shipped(_upc)  public 
     // Call modifier to check if upc has passed previous supply chain stage
     
     // Access Control List enforced by calling Smart Contract / DApp
