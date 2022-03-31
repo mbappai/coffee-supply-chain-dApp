@@ -55,7 +55,6 @@ contract('SupplyChain', function(accounts) {
         // Mark an item as Harvested by calling function harvestItem()
         await supplyChain.harvestItem(upc, originFarmerID, originFarmName, originFarmInformation, originFarmLatitude, originFarmLongitude, productNotes)
 
-        console.log(eventEmitted)
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultBufferOne = await supplyChain.fetchItemBufferOne.call(upc)
         const resultBufferTwo = await supplyChain.fetchItemBufferTwo.call(upc)
@@ -204,6 +203,10 @@ contract('SupplyChain', function(accounts) {
         
         // Declare and Initialize a variable for event
         var eventEmitted = false
+
+
+        //adding role to retailer
+        await supplyChain.addRetailer(retailerID);
         
         // Watch the emitted event Received()
         supplyChain.Received({}, (err, event) => {eventEmitted = true});
@@ -232,6 +235,10 @@ contract('SupplyChain', function(accounts) {
         
         // Declare and Initialize a variable for event
         var eventEmitted = false
+
+
+        //adding role to consumer
+        await supplyChain.addConsumer(consumerID);
         
         // Watch the emitted event Purchased()
         supplyChain.Purchased({}, (err, event) => {eventEmitted = true});
