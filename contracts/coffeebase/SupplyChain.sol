@@ -94,10 +94,10 @@ contract SupplyChain is FarmerRole, DistributorRole, RetailerRole, ConsumerRole 
     _;
     uint _price = items[_upc].productPrice;
     uint amountToReturn = msg.value - _price;
-    // address  payableDistributorID = payable(items[_upc].distributorID);
+
+    // Recommended way of transferring ether as explained in this thread:https://ethereum.stackexchange.com/questions/19341/address-send-vs-address-transfer-best-practice-usage
     items[_upc].distributorID.call{value:amountToReturn};
     // payable(items[_upc].distributorID).transfer(amountToReturn);
-
   }
 
   // Define a modifier that checks if an item.state of a upc is Harvested
