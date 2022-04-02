@@ -101,6 +101,8 @@ App = {
         /// Source the truffle compiled smart contracts
         var jsonSupplyChain='../../build/contracts/SupplyChain.json';
         
+        web3.eth.defaultAccount = web3.eth.accounts[0]
+        
         /// JSONfy the smart contracts
         $.getJSON(jsonSupplyChain, function(data) {
             console.log('data',data);
@@ -234,9 +236,10 @@ App = {
         event.preventDefault();
         var processId = parseInt($(event.target).data('id'));
 
+
         App.contracts.SupplyChain.deployed().then(function(instance) {
-            const walletValue = web3.toWei(3, "ether");
-            return instance.buyItem(App.upc, {from: App.metamaskAccountID, value: walletValue});
+            const walletValue = web3.toWei(2, "ether");
+            return instance.buyItem(App.upc,{from: App.metamaskAccountID, value: walletValue});
         }).then(function(result) {
             $("#ftc-item").text(result);
             console.log('buyItem',result);
@@ -263,7 +266,13 @@ App = {
         event.preventDefault();
         var processId = parseInt($(event.target).data('id'));
 
-        App.contracts.SupplyChain.deployed().then(function(instance) {
+
+        
+        App.contracts.SupplyChain.deployed()
+        .then(function(instance){
+            return instance.addRetailer(App.metamaskAccountID, {from: App.metamaskAccountID})
+        }).then(function(role) {
+            console.log('Role:', role);
             return instance.receiveItem(App.upc, {from: App.metamaskAccountID});
         }).then(function(result) {
             $("#ftc-item").text(result);
@@ -277,7 +286,11 @@ App = {
         event.preventDefault();
         var processId = parseInt($(event.target).data('id'));
 
-        App.contracts.SupplyChain.deployed().then(function(instance) {
+        App.contracts.SupplyChain.deployed()
+        .then(function(instance){
+            return instance.addConsumer(App.consumerID, {from: App.metamaskAccountID})
+        }).then(function(role) {
+            console.log('Role:',role);
             return instance.purchaseItem(App.upc, {from: App.metamaskAccountID});
         }).then(function(result) {
             $("#ftc-item").text(result);
