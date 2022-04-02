@@ -153,7 +153,9 @@ contract('SupplyChain', function(accounts) {
         
         // Watch the emitted event Sold()
         supplyChain.Sold({}, (err, event) => {eventEmitted = true});
-        
+
+        //Add distributor role to address
+        await supplyChain.addDistributor(distributorID);
         
         // Mark an item as Sold by calling function buyItem()
         await supplyChain.buyItem(upc,{from:distributorID,value:web3.utils.toWei('3','ether')});
