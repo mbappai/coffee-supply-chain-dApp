@@ -94,7 +94,9 @@ contract SupplyChain is FarmerRole, DistributorRole, RetailerRole, ConsumerRole 
     _;
     uint _price = items[_upc].productPrice;
     uint amountToReturn = msg.value - _price;
-    payable(items[_upc].consumerID).transfer(amountToReturn);
+    // address  payableDistributorID = payable(items[_upc].distributorID);
+    items[_upc].distributorID.call{value:amountToReturn};
+    // payable(items[_upc].distributorID).transfer(amountToReturn);
 
   }
 
@@ -158,7 +160,7 @@ contract SupplyChain is FarmerRole, DistributorRole, RetailerRole, ConsumerRole 
   // Define a function 'kill' if required
   function kill() public {
     if (msg.sender == owner) {
-      // selfdestruct(owner);
+      selfdestruct(payable(owner));
     }
   }
 
@@ -248,6 +250,7 @@ contract SupplyChain is FarmerRole, DistributorRole, RetailerRole, ConsumerRole 
     paidEnough(items[_upc].productPrice)
     // Call modifer to send any excess ether back to buyer
     checkValue(_upc)
+    onlyDistributor
     {
     
     // Update the appropriate fields - ownerID, distributorID, itemState
