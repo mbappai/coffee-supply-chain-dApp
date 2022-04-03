@@ -62,7 +62,8 @@ App = {
             App.web3Provider = window.ethereum;
             try {
                 // Request account access
-                await window.ethereum.enable();
+                // await window.ethereum.enable();
+                let current = await ethereum.request({ method: 'eth_accounts' });
             } catch (error) {
                 // User denied account access...
                 console.error("User denied account access")
@@ -80,6 +81,7 @@ App = {
         App.getMetaskAccountID();
 
         return App.initSupplyChain();
+        
     },
 
     getMetaskAccountID: function () {
@@ -91,7 +93,6 @@ App = {
                 console.log('Error:',err);
                 return;
             }
-            // console.log('getMetaskID:',res);
             App.metamaskAccountID = res[0];
 
         })

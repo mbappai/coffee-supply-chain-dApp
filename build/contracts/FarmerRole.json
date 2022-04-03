@@ -49,8 +49,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -3331,44 +3330,9 @@
     "name": "solc",
     "version": "0.8.9+commit.e5eed63a.Emscripten.clang"
   },
-  "networks": {
-    "5777": {
-      "events": {
-        "0x2e0ded4123377a3c2bc9a26f1717655a129e2f20752924d42e730ec89c83dbd0": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "account",
-              "type": "address"
-            }
-          ],
-          "name": "FarmerAdded",
-          "type": "event"
-        },
-        "0xa5e0f060af304ab17dd418c7927e3da3ae7868189bf387aee09ab179ccc572f2": {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "address",
-              "name": "account",
-              "type": "address"
-            }
-          ],
-          "name": "FarmerRemoved",
-          "type": "event"
-        }
-      },
-      "links": {},
-      "address": "0x82C506AF6190aF944fbdE9036Cefe2A427D9111d",
-      "transactionHash": "0xd9f39807731bdd8ac5cb1a9fcd17191e10cc663ab9f8fe6a7c0e664b3a87d00c"
-    }
-  },
+  "networks": {},
   "schemaVersion": "3.4.6",
-  "updatedAt": "2022-04-02T13:43:25.360Z",
-  "networkType": "ethereum",
+  "updatedAt": "2022-04-03T07:32:48.704Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

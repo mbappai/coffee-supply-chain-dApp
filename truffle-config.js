@@ -13,10 +13,10 @@ module.exports = {
      network_id: "*",       // Any network (default: none)
     },
     
-    develop: {   // Localhost (default: none)
-      port: 7545,            // Standard Ethereum port (default: none)
-      network_id: "*",       // Any network (default: none)
-    },
+    // develop: {   // Localhost (default: none)
+    //   port: 7545,            // Standard Ethereum port (default: none)
+    //   network_id: "*",       // Any network (default: none)
+    // },
 
     rinkeby: {
       provider: () => new HDWalletProvider( process.env.MNEMONIC_PHRASE,
