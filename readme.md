@@ -7,3 +7,7 @@ This project shows how possible it is to make the supply chain management of any
 ![Sequence diagram](./diagrams/sequence-coffee-chain.png)
 ![State diagram](./diagrams/state-coffee-chain.png)
 ![Data-model diagram](./diagrams/data-model-coffee-chain.png)
+
+## Library Versions
+
+## Contract details
