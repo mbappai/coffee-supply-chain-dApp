@@ -29,5 +29,5 @@ To get started testing this app all you have to do is make sure you have the afo
 
 ## Contract details
 
-- Transaction ID : ==0x481edd4be2e9f0878292bded565f40ced126d5c1883a232bcf995a778e151ff6==
-- Contract Address : ==0xa972F5FF0ED182930a9d4cf69Ce0a21E1EaA18Be==
+- Transaction ID : 0x481edd4be2e9f0878292bded565f40ced126d5c1883a232bcf995a778e151ff6
+- Contract Address : 0xa972F5FF0ED182930a9d4cf69Ce0a21E1EaA18Be
