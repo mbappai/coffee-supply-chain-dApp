@@ -19,7 +19,6 @@ To get started testing this app all you have to do is make sure you have the afo
 
 ```
     npm run dev
-
 ```
 
 ## UML Diagrams
